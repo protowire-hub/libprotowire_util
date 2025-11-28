@@ -1,0 +1,79 @@
+## adapted from boost.outcome
+---
+Language:        Cpp
+AccessModifierOffset: -2
+ConstructorInitializerIndentWidth: 4
+AlignEscapedNewlinesLeft: false
+AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AlwaysBreakBeforeMultilineStrings: false
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterEnum: true
+  AfterStruct: false
+  SplitEmptyFunction: false
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Custom
+BreakBeforeTemplateCloser: true
+BreakBeforeTernaryOperators: false
+BreakBeforeConceptDeclaration: Always
+BreakConstructorInitializers: BeforeComma
+BreakTemplateDeclarations: Yes
+PackConstructorInitializers: Never
+BinPackParameters: true
+ColumnLimit:     100
+CommentPragmas:  '^!<'
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ContinuationIndentWidth: 2
+Cpp11BracedListStyle: true
+DerivePointerAlignment: false
+DisableFormat:   false
+EmptyLineBeforeAccessModifier: LogicalBlock
+ExperimentalAutoDetectBinPacking: false
+ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
+IndentCaseLabels: false
+IndentFunctionDeclarationAfterType: false
+IndentRequiresClause: true
+IndentWidth:     2
+IndentWrappedFunctionNames: false
+MaxEmptyLinesToKeep: 2
+KeepEmptyLinesAtTheStartOfBlocks: true
+NamespaceIndentation: None
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: false
+PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakComment: 200
+PenaltyBreakString: 300
+PenaltyBreakFirstLessLess: 80
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 60
+PointerAlignment: Right
+RequiresClausePosition: OwnLineWithBrace
+RequiresExpressionIndentation: Keyword
+SortUsingDeclarations: Never
+Standard:        Cpp11
+SeparateDefinitionBlocks: Always
+SpaceAfterCStyleCast: true
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterIfMacros: true
+  AfterRequiresInClause: true
+  AfterRequiresInExpression: true
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInParentheses: false
+SpacesInAngles:  false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: true
+TabWidth:        8
+UseTab:          Never
+...
+

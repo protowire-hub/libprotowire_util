@@ -1,0 +1,52 @@
+*~
+.#*
+*#
+*.bak
+*.log
+*.gz
+*.tar
+*.tgz
+*.zip
+*.orig
+*.rej
+.env?*
+.Trash*
+.pytest_cache
+/build
+.gdb_history
+# site cmake presets
+CMakeUserPresets*.json
+
+## github C++ .gitignore template
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
