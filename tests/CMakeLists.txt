@@ -7,4 +7,4 @@ set(CATCH_DEVELOPMENT_BUILD ON)
 find_package(Catch2 REQUIRED 3)
 include(Catch)
 
-add_catch_test(test_type_name)
+add_catch_test(test_type_name PRIVATE protowire_util)
