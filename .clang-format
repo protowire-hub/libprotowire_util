@@ -1,15 +1,19 @@
-## adapted from boost.outcome
 ---
-Language:        Cpp
+Language: Cpp
 AccessModifierOffset: -2
 ConstructorInitializerIndentWidth: 4
+AlignAfterOpenBracket: true
 AlignEscapedNewlinesLeft: false
+AlignOperands: Align
 AlignTrailingComments: true
 AllowAllParametersOfDeclarationOnNextLine: true
-AllowShortBlocksOnASingleLine: Empty
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
+AllowBreakBeforeNoexceptSpecifier: OnlyWithParen
+AllowShortBlocksOnASingleLine: Always
+AllowShortEnumsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLambdasOnASingleLine: Inline
+AllowShortLoopsOnASingleLine: false
 AlwaysBreakBeforeMultilineStrings: false
 BraceWrapping:
   AfterCaseLabel: false
@@ -17,7 +21,7 @@ BraceWrapping:
   AfterEnum: true
   AfterStruct: false
   SplitEmptyFunction: false
-BreakBeforeBinaryOperators: None
+BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Custom
 BreakBeforeTemplateCloser: true
 BreakBeforeTernaryOperators: false
@@ -26,21 +30,24 @@ BreakConstructorInitializers: BeforeComma
 BreakTemplateDeclarations: Yes
 PackConstructorInitializers: Never
 BinPackParameters: true
-ColumnLimit:     100
-CommentPragmas:  '^!<'
+ColumnLimit: 90
+CommentPragmas: "^!<"
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
-ContinuationIndentWidth: 2
+ContinuationIndentWidth: 6
 Cpp11BracedListStyle: true
 DerivePointerAlignment: false
-DisableFormat:   false
+DisableFormat: false
+EmptyLineAfterAccessModifier: Leave
 EmptyLineBeforeAccessModifier: LogicalBlock
 ExperimentalAutoDetectBinPacking: false
-ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
+FixNamespaceComments: true
+ForEachMacros: [BOOST_FOREACH]
 IndentCaseLabels: false
 IndentFunctionDeclarationAfterType: false
 IndentRequiresClause: true
-IndentWidth:     2
-IndentWrappedFunctionNames: false
+IndentWidth: 2
+IndentWrappedFunctionNames: true
+InsertNewlineAtEOF: true
 MaxEmptyLinesToKeep: 2
 KeepEmptyLinesAtTheStartOfBlocks: true
 NamespaceIndentation: None
@@ -51,13 +58,14 @@ PenaltyBreakComment: 200
 PenaltyBreakString: 300
 PenaltyBreakFirstLessLess: 80
 PenaltyExcessCharacter: 1000000
-PenaltyReturnTypeOnItsOwnLine: 60
-PointerAlignment: Right
+PenaltyReturnTypeOnItsOwnLine: 100
+PointerAlignment: Left
+QualifierAlignment: Right
 RequiresClausePosition: OwnLineWithBrace
 RequiresExpressionIndentation: Keyword
-SortUsingDeclarations: Never
-Standard:        Cpp11
 SeparateDefinitionBlocks: Always
+SortUsingDeclarations: Never
+Standard: c++20
 SpaceAfterCStyleCast: true
 SpaceAfterTemplateKeyword: true
 SpaceBeforeAssignmentOperators: true
@@ -70,10 +78,9 @@ SpaceBeforeParensOptions:
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 2
 SpacesInParentheses: false
-SpacesInAngles:  false
+SpacesInAngles: false
 SpacesInCStyleCastParentheses: false
 SpacesInContainerLiterals: true
-TabWidth:        8
-UseTab:          Never
-...
-
+TabWidth: 4
+UseTab: Never
+---
