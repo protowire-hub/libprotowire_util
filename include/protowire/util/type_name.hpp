@@ -50,7 +50,7 @@ namespace type_name {
 ///
 template <typename T>
 struct type_name {
-  static boost::string_view const apply() noexcept {
+  static std::string const apply() noexcept {
     return boost::core::demangle(typeid(T).name());
   }
 };
@@ -60,7 +60,7 @@ struct type_name {
 template <typename T>
   requires (std::is_const_v<T>)
 struct type_name<T> {
-  static boost::string_view const apply() noexcept {
+  static std::string const apply() noexcept {
     return type_name<typename std::remove_cv<T>::type>::apply() + " const";
   }
 };
