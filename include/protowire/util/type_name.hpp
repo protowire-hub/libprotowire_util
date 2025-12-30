@@ -2,7 +2,7 @@
  * @file type_name.hpp
  * @author Sean Champ <spchamp@users.noreply.github.com>
  * @brief utilities for user-visible type names
- * @version 0.1
+ * @version 0.2
  * @date 2025-11-28
  *
  * @copyright Copyright (c) 2025 Sean Champ
@@ -26,6 +26,7 @@
 #pragma once
 
 #include <concepts>
+#include <string>
 #include <type_traits>
 #include <boost/core/demangle.hpp>
 
@@ -61,7 +62,15 @@ template <typename T>
   requires (std::is_const_v<T>)
 struct type_name<T> {
   static std::string const apply() noexcept {
-    return type_name<typename std::remove_cv<T>::type>::apply() + " const";
+    return type_name<std::remove_cv_t<T>>::apply() + " const";
+  }
+};
+
+template <typename T>
+  requires (std::is_reference_v<T>)
+struct type_name<T> {
+  static std::string const apply() noexcept {
+    return type_name<std::remove_reference_t<T>>::apply() + "&";
   }
 };
 
