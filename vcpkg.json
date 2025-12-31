@@ -1,0 +1,17 @@
+{
+  "name": "protowire-util",
+  "version": "1.0",
+  "dependencies": [
+    "boost-logic",
+    "boost-mpl",
+    "boost-static-assert",
+    "boost-utility",
+    {
+      "name": "catch2",
+      "features": [
+        "thread-safe-assertions"
+      ]
+    },
+    "boost-preprocessor"
+  ]
+}
