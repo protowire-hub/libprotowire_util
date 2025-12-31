@@ -113,7 +113,6 @@ function(add_object NAME)
         target_link_libraries(${NAME} PUBLIC ${opt_SYSTEM_PUBLIC})
     endif()
 
-
     if(DEFINED opt_PRIVATE_INCLUDE)
         target_include_directories(${NAME} PRIVATE ${opt_PRIVATE_INCLUDE})
     endif()
