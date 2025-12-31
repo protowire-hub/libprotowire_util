@@ -34,7 +34,7 @@
 
 #include <boost/nowide/stackstring.hpp>
 
-#include <protowire/util/type_repr.hpp>
+#include <protowire/test/type_repr.hpp>
 #include <protowire/util/lstring.hpp>
 
 namespace protowire {

@@ -3,7 +3,7 @@
 #include <string>
 #include <boost/preprocessor/cat.hpp>
 #include <catch2/catch_test_macros.hpp>
-#include <protowire/util/object_repr.hpp>
+#include <protowire/test/object_repr.hpp>
 
 #ifndef CHECK_STR_FIND
 #define CHECK_STR_FIND(str, ...)                                                         \

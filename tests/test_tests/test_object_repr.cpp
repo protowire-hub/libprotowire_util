@@ -1,6 +1,6 @@
 #include <string>
 
-#include <protowire/util/object_repr.hpp>
+#include <protowire/test/object_repr.hpp>
 
 #include <catch2/catch_test_macros.hpp>
 

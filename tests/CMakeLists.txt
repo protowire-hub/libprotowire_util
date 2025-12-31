@@ -13,3 +13,4 @@ find_package(Boost CONFIG REQUIRED
 
 add_catch_test(test_type_name PRIVATE protowire_util Boost::preprocessor)
 add_subdirectory(util_tests)
+add_subdirectory(test_tests)

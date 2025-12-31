@@ -1,5 +1,5 @@
 
-#include <protowire/util/type_repr.hpp>
+#include <protowire/test/type_repr.hpp>
 
 #include <catch2/catch_test_macros.hpp>
 
