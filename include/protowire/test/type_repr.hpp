@@ -35,8 +35,6 @@
 #include <utility>
 #include <variant>
 
-#include <boost/static_assert.hpp>
-
 #include <protowire/util/type_name.hpp>
 
 namespace protowire {
@@ -69,7 +67,7 @@ std::string with_repr_stream(F&& func) {
 
 template <typename T>
 std::string prefix_repr(std::string_view const& prefix) {
-  return with_repr_stream([&prefix](std::stringstream& b) {
+  return with_repr_stream([&prefix](std::ostream& b) {
     b << prefix;
     b << type_repr<T>::apply();
   });
@@ -77,7 +75,7 @@ std::string prefix_repr(std::string_view const& prefix) {
 
 template <typename T>
 std::string suffix_repr(std::string_view const& suffix) {
-  return with_repr_stream([&suffix](std::stringstream& b) {
+  return with_repr_stream([&suffix](std::ostream& b) {
     b << type_repr<T>::apply();
     b << suffix;
   });
@@ -85,7 +83,7 @@ std::string suffix_repr(std::string_view const& suffix) {
 
 template <typename T>
 std::string infix_repr(std::string_view const& prefix, std::string_view const& suffix) {
-  return with_repr_stream([&prefix, &suffix](std::stringstream& b) {
+  return with_repr_stream([&prefix, &suffix](std::ostream& b) {
     b << prefix;
     b << type_repr<T>::apply();
     b << suffix;
@@ -93,23 +91,22 @@ std::string infix_repr(std::string_view const& prefix, std::string_view const& s
 };
 
 template <typename F>
-  requires (std::is_convertible_v<std::invoke_result_t<F, std::stringstream&>, void>)
+  requires (std::is_convertible_v<std::invoke_result_t<F, std::ostream&>, void>)
 std::string template_repr(std::string_view const& template_name, F&& func) {
-  return with_repr_stream([&template_name, &func](std::stringstream& b) {
-    b << template_name;
-    b << "<";
+  return with_repr_stream([&template_name, &func](std::ostream& b) {
+    b << template_name << "<";
     std::invoke(func, b);
     b << ">";
   });
 };
 
 std::string template_repr(std::string_view const& template_name) {
-  return template_repr(template_name, [](std::stringstream const&) {});
+  return template_repr(template_name, [](std::ostream const&) {});
 };
 
 template <typename First, typename... Rest>
 std::string template_repr(std::string_view const& template_name) {
-  return template_repr(template_name, [](std::stringstream& b) {
+  return template_repr(template_name, [](std::ostream& b) {
     b << type_repr<First>::apply();
     ((b << ", " << type_repr<Rest>::apply()), ...);
   });
@@ -140,17 +137,34 @@ struct type_repr<T&&> {
   static std::string const apply() { return suffix_repr<T>("&&"); }
 };
 
-template <template <typename> typename Meta, typename... Args>
-struct type_repr<Meta<Args...>> {
-  static std::string const apply() {
+template <template <typename...> typename Meta, typename... Args>
+struct meta_prefix {
+  static std::optional<std::string> const apply() {
     std::string const orig_name = type_name<Meta<Args...>>::apply();
     std::size_t const st = orig_name.find('<');
     if (st == orig_name.npos) {
-      return orig_name;
+      return std::nullopt;
     } else {
-      return template_repr<Args...>(orig_name.substr(0, st));
+      return orig_name.substr(0, st);
     }
   }
+};
+
+template <template <typename...> typename Meta, typename First, typename... Rest>
+struct type_repr<Meta<First, Rest...>> {
+  static std::string const apply() {
+    std::optional<std::string> const meta_name =
+          meta_prefix<Meta, First, Rest...>::apply();
+    if (meta_name.has_value()) {
+      return template_repr<First, Rest...>(meta_name.value());
+    }
+    return type_name<Meta<First, Rest...>>::apply();
+  }
+};
+
+template <template <typename...> typename Meta>
+struct type_repr<Meta<>> {
+  static std::string const apply() { return type_name<Meta<>>::apply(); }
 };
 
 template <>
