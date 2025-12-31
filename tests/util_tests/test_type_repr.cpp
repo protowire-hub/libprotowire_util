@@ -16,6 +16,7 @@ TEST_CASE("type_repr for standard types") {
   CHECK(type_repr<std::optional<int>>::apply() == "std::optional<int>");
   CHECK(type_repr<std::variant<int, char>>::apply() == "std::variant<int, char>");
   CHECK(type_repr<int&>::apply() == "int&");
+  CHECK(type_repr<int&&>::apply() == "int&&");
   CHECK(type_repr<std::string>::apply() == "std::string");
   CHECK(type_repr<std::wstring>::apply() == "std::wstring");
 
@@ -23,6 +24,12 @@ TEST_CASE("type_repr for standard types") {
   CHECK(type_repr<std::variant<int const*, char const*>>::apply()
         == "std::variant<int const*, char const*>");
   CHECK(type_repr<int const&>::apply() == "int const&");
+  CHECK(type_repr<int const&&>::apply() == "int const&&");
+
+  CHECK(type_repr<std::optional<std::pair<int, std::string>>>::apply()
+        == "std::optional<std::pair<int, std::string>>");
+  CHECK(type_repr<std::variant<int, std::string>>::apply()
+        == "std::variant<int, std::string>");
 }
 
 TEST_CASE("type_repr for arbitrary template parameter pack") {

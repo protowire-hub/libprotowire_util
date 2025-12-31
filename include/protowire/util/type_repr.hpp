@@ -136,8 +136,8 @@ struct type_repr<T&> {
 };
 
 template <typename T>
-struct type_repr<T const&> {
-  static std::string const apply() { return suffix_repr<T>(" const&"); }
+struct type_repr<T&&> {
+  static std::string const apply() { return suffix_repr<T>("&&"); }
 };
 
 template <template <typename> typename Meta, typename... Args>
@@ -151,21 +151,6 @@ struct type_repr<Meta<Args...>> {
       return template_repr<Args...>(orig_name.substr(0, st));
     }
   }
-};
-
-template <typename T>
-struct type_repr<std::optional<T>> {
-  static std::string const apply() { return template_repr<T>("std::optional"); }
-};
-
-template <typename... Opt>
-struct type_repr<std::variant<Opt...>> {
-  static std::string const apply() { return template_repr<Opt...>("std::variant"); }
-};
-
-template <typename... Memb>
-struct type_repr<std::tuple<Memb...>> {
-  static std::string const apply() { return template_repr<Memb...>("std::tuple"); }
 };
 
 template <>
@@ -192,7 +177,6 @@ template <>
 struct type_repr<std::u32string> {
   static std::string const apply() { return "std::u32string"; }
 };
-
 
 template <>
 struct type_repr<std::string_view> {

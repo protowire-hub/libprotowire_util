@@ -65,13 +65,20 @@ struct type_name<T> {
 };
 
 template <typename T>
-  requires (std::is_reference_v<T>)
+  requires (std::is_lvalue_reference_v<T>)
 struct type_name<T> {
   static std::string const apply() noexcept {
     return type_name<std::remove_reference_t<T>>::apply() + "&";
   }
 };
 
+template <typename T>
+  requires (std::is_rvalue_reference_v<T>)
+struct type_name<T> {
+  static std::string const apply() noexcept {
+    return type_name<std::remove_reference_t<T>>::apply() + "&&";
+  }
+};
 
 }  // namespace type_name
 }  // namespace util
