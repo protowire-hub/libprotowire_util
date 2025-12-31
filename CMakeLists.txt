@@ -1,4 +1,6 @@
-cmake_minimum_required (VERSION 3.10)
+
+## cmake 3.20 defines cmake_path
+cmake_minimum_required (VERSION 3.20)
 
 project(libprotowire_util CXX)
 
@@ -18,7 +20,7 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
-set(BOOTSTRAP_VCPKG ON CACHE BOOL 
+set(BOOTSTRAP_VCPKG ON CACHE BOOL
   "Bootsrap vcpkg if true and vendor/vcpkg/vcpkg does not exist")
 
 set(PROTOWIRE_UTIL_TESTS ON CACHE BOOL
@@ -29,9 +31,12 @@ if(DEFINED ENV{BUILD_TESTS})
   set(PROTOWIRE_UTIL_TESTS $ENV{BUILD_TESTS})
 endif()
 
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/tools_dir.cmake)
+install_compiler_tools()
+
 # FIXME add a docs note to README:
 #
-# Given the content of CmakePres bootstrapping vcpkg 
+# Given the content of CMakePresets.json, bootstrapping vcpkg
 # with the tooling provided here would require running
 # cmake, at most once, without any presets
 

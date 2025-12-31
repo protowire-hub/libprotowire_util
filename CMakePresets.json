@@ -2,6 +2,16 @@
   "version": 5,
   "configurePresets": [
     {
+      "name": "vcpkg",
+      "environment": {
+        "VCPKG_ROOT": "${sourceDir}/vendor/vcpkg"
+      },
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      },
+      "hidden": true
+    },
+    {
       "name": "debug",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/debug",
@@ -11,14 +21,71 @@
       }
     },
     {
-      "name": "debug-vcpkg",
-      "inherits": "debug",
+      "name": "dev-base",
+      "inherits": [
+        "debug"
+      ],
+      "hidden": true,
+      "cacheVariables": {},
       "environment": {
-        "VCPKG_ROOT": "${sourceDir}/vendor/vcpkg"
-      },
-      "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+        "VCPKG_NO_CI": "DEFINED"
       }
+    },
+    {
+      "name": "release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CMAKE_OPTIMIZE_DEPENDENCIES": true
+      }
+    },
+    {
+      "name": "release+debug",
+      "inherits": [
+        "release"
+      ],
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "lint",
+      "inherits": "dev-base",
+      "binaryDir": "${sourceDir}/build/lint",
+      "cacheVariables": {
+        "libprotowire_util_LINT": true
+      }
+    },
+    {
+      "name": "lint-vcpkg",
+      "inherits": [
+        "lint",
+        "vcpkg"
+      ]
+    },
+    {
+      "name": "debug-vcpkg",
+      "inherits": [
+        "debug",
+        "vcpkg"
+      ]
+    },
+    {
+      "name": "release-vcpkg",
+      "inherits": [
+        "release",
+        "vcpkg"
+      ]
+    },
+    {
+      "name": "release+debug-vcpkg",
+      "inherits": [
+        "release+debug",
+        "vcpkg"
+      ]
     }
   ]
 }
