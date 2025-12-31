@@ -85,12 +85,7 @@ struct LBasicString {
   template <typename Traits, typename Alloc>
   bool operator==(std::basic_string<CharT, Traits, Alloc> const& s) const {
     if ((s.size() + 1) == N) {
-      std::size_t n = 0;
-      for (CharT const& c : s) {
-        if (data[n] != c) { return false; }
-        n++;
-      }
-      return true;
+      return Traits::compare(s.data(), data, N) == 0;
     }
     return false;
   }
@@ -98,12 +93,7 @@ struct LBasicString {
   template <typename Traits>
   bool operator==(std::basic_string_view<CharT, Traits> const& s) const {
     if ((s.size() + 1) == N) {
-      std::size_t n = 0;
-      for (CharT const& c : s) {
-        if (data[n] != c) { return false; }
-        n++;
-      }
-      return true;
+      return Traits::compare(s.data(), data, N) == 0;
     }
     return false;
   }
