@@ -4,6 +4,7 @@
   "dependencies": [
     "boost-logic",
     "boost-mpl",
+    "boost-nowide",
     "boost-static-assert",
     "boost-utility",
     {

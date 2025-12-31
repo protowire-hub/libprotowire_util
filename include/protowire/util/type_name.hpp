@@ -30,8 +30,6 @@
 #include <type_traits>
 #include <boost/core/demangle.hpp>
 
-#include <boost/utility/string_view.hpp>
-
 namespace protowire {
 namespace util {
 namespace type_name {
