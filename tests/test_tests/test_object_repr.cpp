@@ -8,17 +8,10 @@
 
 using protowire::util::type_name::type_name;
 using protowire::test::object_repr::object_repr;
+using protowire::test::object_repr::repr_string;
 
-#ifndef TEST_OBJECT_REPR
-#define TEST_OBJECT_REPR(value, expect)                                                  \
-  {                                                                                      \
-    auto const BOOST_PP_CAT(__value_, __LINE__) = (value);                               \
-    using BOOST_PP_CAT(__value_t_, __LINE__) =                                           \
-          std::remove_cv_t<decltype(BOOST_PP_CAT(__value_, __LINE__))>;                  \
-    CHECK(object_repr<BOOST_PP_CAT(__value_t_, __LINE__)>::apply(                        \
-                BOOST_PP_CAT(__value_, __LINE__))                                        \
-          == (expect));                                                                  \
-  }
+#ifndef TEST_REPR_STRING
+#define TEST_REPR_STRING(value, expect) CHECK(repr_string((value)) == (expect));
 #endif
 
 #ifndef TEST_OBJECT_REPR_C
@@ -46,27 +39,27 @@ using protowire::test::object_repr::object_repr;
 TEST_CASE("object_repr : typographical objects") {
 
   SECTION("String") {
-    TEST_OBJECT_REPR(std::string{"ABC"}, "std::string{{\"ABC\"}}");
-    TEST_OBJECT_REPR(std::wstring{L"ABC"}, "std::wstring{{L\"ABC\"}}");
-    TEST_OBJECT_REPR(std::u8string{u8"±4Å"}, "std::u8string{{u8\"±4Å\"}}");
-    TEST_OBJECT_REPR(std::u16string{u"±4Å"}, "std::u16string{{u\"±4Å\"}}");
-    TEST_OBJECT_REPR(std::u32string{U"±4Å"}, "std::u32string{{U\"±4Å\"}}");
+    TEST_REPR_STRING(std::string{"ABC"}, "std::string{{\"ABC\"}}");
+    TEST_REPR_STRING(std::wstring{L"ABC"}, "std::wstring{{L\"ABC\"}}");
+    TEST_REPR_STRING(std::u8string{u8"±4Å"}, "std::u8string{{u8\"±4Å\"}}");
+    TEST_REPR_STRING(std::u16string{u"±4Å"}, "std::u16string{{u\"±4Å\"}}");
+    TEST_REPR_STRING(std::u32string{U"±4Å"}, "std::u32string{{U\"±4Å\"}}");
   }
 
   SECTION("String View") {
-    TEST_OBJECT_REPR(std::string_view{"ABC"}, "std::string_view{{\"ABC\"}}");
-    TEST_OBJECT_REPR(std::wstring_view{L"ABC"}, "std::wstring_view{{L\"ABC\"}}");
-    TEST_OBJECT_REPR(std::u8string_view{u8"±4Å"}, "std::u8string_view{{u8\"±4Å\"}}");
-    TEST_OBJECT_REPR(std::u16string_view{u"±4Å"}, "std::u16string_view{{u\"±4Å\"}}");
-    TEST_OBJECT_REPR(std::u32string_view{U"±4Å"}, "std::u32string_view{{U\"±4Å\"}}");
+    TEST_REPR_STRING(std::string_view{"ABC"}, "std::string_view{{\"ABC\"}}");
+    TEST_REPR_STRING(std::wstring_view{L"ABC"}, "std::wstring_view{{L\"ABC\"}}");
+    TEST_REPR_STRING(std::u8string_view{u8"±4Å"}, "std::u8string_view{{u8\"±4Å\"}}");
+    TEST_REPR_STRING(std::u16string_view{u"±4Å"}, "std::u16string_view{{u\"±4Å\"}}");
+    TEST_REPR_STRING(std::u32string_view{U"±4Å"}, "std::u32string_view{{U\"±4Å\"}}");
   }
 
   SECTION("Char") {
-    TEST_OBJECT_REPR('x', "\'x\'");
-    TEST_OBJECT_REPR(L'x', "L\'x\'");
-    TEST_OBJECT_REPR(u8'x', "u8\'x\'");
-    TEST_OBJECT_REPR(u'±', "u\'±\'");
-    TEST_OBJECT_REPR(U'±', "U\'±\'");
+    TEST_REPR_STRING('x', "\'x\'");
+    TEST_REPR_STRING(L'x', "L\'x\'");
+    TEST_REPR_STRING(u8'x', "u8\'x\'");
+    TEST_REPR_STRING(u'±', "u\'±\'");
+    TEST_REPR_STRING(U'±', "U\'±\'");
   }
 
   auto p = "abc";
@@ -77,11 +70,11 @@ TEST_CASE("object_repr : typographical objects") {
 
   CHECKED_IF(type_name<decltype(p)>::apply() == "char const*") {
     SECTION("Char const pointer") {
-      TEST_OBJECT_REPR("ABC", "\"ABC\"");
-      TEST_OBJECT_REPR(L"ABC", "L\"ABC\"");
-      TEST_OBJECT_REPR(u8"ABC", "u8\"ABC\"");
-      TEST_OBJECT_REPR(u"ABC", "u\"ABC\"");
-      TEST_OBJECT_REPR(U"ABC", "U\"ABC\"");
+      TEST_REPR_STRING("ABC", "\"ABC\"");
+      TEST_REPR_STRING(L"ABC", "L\"ABC\"");
+      TEST_REPR_STRING(u8"ABC", "u8\"ABC\"");
+      TEST_REPR_STRING(u"ABC", "u\"ABC\"");
+      TEST_REPR_STRING(U"ABC", "U\"ABC\"");
     }
   }
 

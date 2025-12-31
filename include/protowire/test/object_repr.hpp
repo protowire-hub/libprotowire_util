@@ -104,8 +104,29 @@ struct object_repr<T> {
 };
 
 template <typename T>
-std::string repr_string(T const& ob) {
-  return object_repr<T>::apply(ob);
+  requires (std::is_reference_v<T>)
+std::string repr_string(T& ob) {
+  return object_repr<T&>::apply(ob);
+}
+
+template <typename T>
+std::string repr_string(T&& ob) {
+  return object_repr<T>::apply(std::forward<T>(ob));
+}
+
+template <typename T>
+std::string repr_string(T const&& ob) {
+  return object_repr<T const>::apply(std::forward<T const>(ob));
+}
+
+template <typename T>
+std::string repr_string(T* const ob) {
+  return object_repr<T*>::apply(ob);
+}
+
+template <typename T>
+std::string repr_string(T const* const ob) {
+  return object_repr<T const*>::apply(ob);
 }
 
 template <typename T, typename CharT, typename Traits>
