@@ -20,6 +20,15 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/lint.cmake)
+
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/iwyu.cmake)
+check_iwyu()
+
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/tidy.cmake)
+check_tidy()
+
+
 set(BOOTSTRAP_VCPKG ON CACHE BOOL
   "Bootsrap vcpkg if true and vendor/vcpkg/vcpkg does not exist")
 
