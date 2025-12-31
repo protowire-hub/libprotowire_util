@@ -7,7 +7,7 @@
 #include <boost/preprocessor/cat.hpp>
 
 using protowire::util::type_name::type_name;
-using protowire::util::object_repr::object_repr;
+using protowire::test::object_repr::object_repr;
 
 #ifndef TEST_OBJECT_REPR
 #define TEST_OBJECT_REPR(value, expect)                                                  \

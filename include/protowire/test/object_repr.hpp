@@ -38,12 +38,12 @@
 #include <protowire/util/lstring.hpp>
 
 namespace protowire {
-namespace util {
+namespace test {
 namespace object_repr {
 
 using protowire::util::lstring::LString;
-using protowire::util::type_repr::type_repr;
-using protowire::util::type_repr::with_repr_stream;
+using protowire::test::type_repr::type_repr;
+using protowire::test::type_repr::with_repr_stream;
 
 template <typename T, LString Name>
 struct const_name_repr {
@@ -342,5 +342,5 @@ struct object_repr<T> {
 
 
 }  // namespace object_repr
-}  // namespace util
+}  // namespace test
 }  // namespace protowire

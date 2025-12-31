@@ -38,7 +38,7 @@
 #include <protowire/util/type_name.hpp>
 
 namespace protowire {
-namespace util {
+namespace test {
 namespace type_repr {
 
 using protowire::util::type_name::type_name;
@@ -219,5 +219,5 @@ struct type_repr<std::u32string_view> {
 
 
 }  // namespace type_repr
-}  // namespace util
+}  // namespace test
 }  // namespace protowire

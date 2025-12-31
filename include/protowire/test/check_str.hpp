@@ -11,7 +11,7 @@
     UNSCOPED_INFO("CHECK_STR_FIND(" << #str << ", " << #__VA_ARGS__ << ")");             \
     ::std::string const BOOST_PP_CAT(__test_str_, __LINE__) = str;                       \
     UNSCOPED_INFO(#str << " => "                                                         \
-                       << ::protowire::util::object_repr::repr_string(                   \
+                       << ::protowire::test::object_repr::repr_string(                   \
                                 BOOST_PP_CAT(__test_str_, __LINE__)));                   \
     CHECK(!!(BOOST_PP_CAT(__test_str_, __LINE__).find(__VA_ARGS__)                       \
              != BOOST_PP_CAT(__test_str_, __LINE__).npos));                              \

@@ -9,7 +9,7 @@ struct custom_unary_t {};
 template <typename... Args>
 struct custom_nary_t {};
 
-using protowire::util::type_repr::type_repr;
+using protowire::test::type_repr::type_repr;
 
 TEST_CASE("type_repr for standard types") {
   CHECK(type_repr<int>::apply() == "int");
